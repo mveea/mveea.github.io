@@ -132,16 +132,13 @@
 
     <!-- Modal content -->
     <div class="modal-content">
-      <div class="modal-header">
+      <div id="myModalHeader" class="modal-header">
         <span class="close">&times;</span>
         <h2>Modal Header</h2>
       </div>
-      <div class="modal-body">
+      <div id="myModalBody" class="modal-body">
         <p>Some text in the Modal Body</p>
         <p>Some other text...</p>
-      </div>
-      <div class="modal-footer">
-        <h3>Modal Footer</h3>
       </div>
     </div>
   
@@ -174,6 +171,8 @@
 
     // Get the modal
     var modal = document.getElementById("myModal");
+    var modalheader = document.getElementById("myModalHeader");
+    var modalboddy = document.getElementById("myModalBody");
     
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -214,9 +213,6 @@
             console.log(data)
             for (let element of data) {
                 let row = table.insertRow();
-                row.onclick = function(){
-                    modal.style.display = "block";
-                };
                 console.log(element)
                 $.getJSON('devices/'+element, function(devicerawdata) {  
                     devicedata = JSON.parse(JSON.stringify(devicerawdata))
@@ -226,6 +222,15 @@
                         let text = document.createTextNode(devicedata[key]);
                         cell.appendChild(text);
                     } 
+                    row.onclick = function(){
+                        modalheader.text = devicedata["name"]
+                        modalbody.text =""
+                        for (key in dataset) {
+                            let text = document.createTextNode(devicedata[key]);
+                            modalbody.appendChild(text);
+                        } 
+                        modal.style.display = "block";
+                    };
                 });
             }
         });
