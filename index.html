@@ -86,7 +86,9 @@
 
     let table = document.querySelector("myTable");
 
-    $.getJSON('devices/index.json', function(data) {  
+    $.getJSON('devices/index.json', function(rawdata) {  
+        data = JSON.parse(rawdata)
+        log(data)
         for (let element of data) {
             let row = table.insertRow();
             if (element != "template.json") {
@@ -102,7 +104,9 @@
         }
     });
 
-    $.getJSON('devices/template.json', function(data) {  
+    $.getJSON('devices/template.json', function(rawdata) {  
+        data = JSON.parse(rawdata)
+        log(data)
         let datastruct = Object.keys(data);   
         generateTableHead(table, datastruct); // then the head
     });
