@@ -223,8 +223,8 @@
                         cell.appendChild(text);
                     } 
                     row.onclick = function(){
-                        modalheader.value = devicedata["name"]
-                        modalbody.value =""
+                        modalheader.innerHTML = devicedata["name"]
+                        modalbody.innerHTML =""
                         for (key in devicedata) {
                             let text = document.createTextNode(key + " : " + devicedata[key] + "\n");
                             modalbody.appendChild(text);
