@@ -137,8 +137,8 @@
         <h2>Modal Header</h2>
       </div>
       <div id="myModalBody" class="modal-body">
-        <p>Some text in the Modal Body</p>
-        <p>Some other text...</p>
+        <table id="modalTable">
+        </table>
       </div>
     </div>
   
@@ -172,7 +172,7 @@
     // Get the modal
     var modal = document.getElementById("myModal");
     var modalheader = document.getElementById("myModalHeader");
-    var modalbody = document.getElementById("myModalBody");
+    var modaltable = document.getElementById("modalTable");
     
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -224,10 +224,16 @@
                     } 
                     row.onclick = function(){
                         modalheader.innerHTML = devicedata["name"]
-                        modalbody.innerHTML =""
+                        modaltable.innerHTML =""
+                        let list = modalbody.insert
                         for (key in devicedata) {
-                            let text = document.createTextNode(key + " : " + devicedata[key] + "\n");
-                            modalbody.appendChild(text);
+                            let modalrow = modaltable.insertRow();
+                            let cell = row.insertCell();
+                            let text = document.createTextNode(key);
+                            cell.appendChild(text);
+                            cell = row.insertCell();
+                            text = document.createTextNode(devicedata[key]);
+                            cell.appendChild(text);
                         } 
                         modal.style.display = "block";
                     };
