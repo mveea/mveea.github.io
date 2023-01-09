@@ -87,20 +87,8 @@
 <script>
 function myFunction() {
 
-    var pdfFilesDirectory = 'devices';
-
-    // get auto-generated page 
-    $.ajax({url: pdfFilesDirectory}).then(function(html) {
-        // create temporary DOM element
-        var document = $(html);
-
-        // find all links ending with .pdf 
-        document.find('a[href$=.json]').each(function() {
-            var pdfName = $(this).text();
-            var pdfUrl = $(this).attr('href');
-
-            document.getElementById("fileItem").innerHTML = pdfName;
-        })
+    $.getJSON('devices/index.json', function(data) {         
+        alert(data);
     });
     
 
