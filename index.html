@@ -42,48 +42,13 @@
 <body>
 
 <h2>My Customers</h2>
-<input type="text" id="fileItem" />
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for ..." title="Type in a keyword">
 
 <table id="myTable">
-  <tr class="header">
-    <th style="width:60%;">Name</th>
-    <th style="width:40%;">Country</th>
-  </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Berglunds snabbkop</td>
-    <td>Sweden</td>
-  </tr>
-  <tr>
-    <td>Island Trading</td>
-    <td>UK</td>
-  </tr>
-  <tr>
-    <td>Koniglich Essen</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Laughing Bacchus Winecellars</td>
-    <td>Canada</td>
-  </tr>
-  <tr>
-    <td>Magazzini Alimentari Riuniti</td>
-    <td>Italy</td>
-  </tr>
-  <tr>
-    <td>North/South</td>
-    <td>UK</td>
-  </tr>
-  <tr>
-    <td>Paris specialites</td>
-    <td>France</td>
-  </tr>
 </table>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
 <script>
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
@@ -107,9 +72,42 @@
         }
     }
 
-    $.getJSON('devices/index.json', function(data) {         
-        alert(data);
+    function generateTableHead(table, data) {
+        let thead = table.createTHead();
+        let row = thead.insertRow();
+        for (let key of data) {
+            let th = document.createElement("th");
+            let text = document.createTextNode(key);
+            th.appendChild(text);
+            row.appendChild(th);
+        }
+    }
+
+
+    let table = document.querySelector("myTable");
+    var datastruct
+
+    $.getJSON('devices/template.json', function(data) {  
+        let datastruct = Object.keys(data);   
     });
+
+    $.getJSON('devices/index.json', function(data) {  
+        for (let element of data) {
+            let row = table.insertRow();
+            if (element != "template.json") {
+                $.getJSON('devices/'+element, function(devicedata) {  
+                    for (key in devicedata) {
+                        let cell = row.insertCell();
+                        let text = document.createTextNode(element[key]);
+                        cell.appendChild(text);
+                    } 
+                });
+                
+            }
+        }
+    });
+
+    generateTableHead(table, datastruct); // then the head
 </script>
 
 </body>
