@@ -1,8 +1,0 @@
-{
-    "name":"test1",
-    "manufacturer":"hello",
-    "type":"bluetooth",
-    "features":["temperature", "humidity"],
-    "veeahub":["vhx09-10","vhc25"],
-    "solution":["vBus", "vPME"]
-}

@@ -1,8 +1,14 @@
 {
     "name":"",
     "manufacturer":"",
+    "model":"",
     "type":"",
     "features":[],
     "veeahub":[],
-    "solution":[]
+    "solution":[],
+    "status":"",
+    "region":"",
+    "url":"",
+    "joining":"",
+    "comments":""
 }
