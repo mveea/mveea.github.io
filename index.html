@@ -84,19 +84,21 @@
     }
 
 
-    let table = document.querySelector("myTable");
+    let table = document.getElementById("myTable");
 
     $.getJSON('devices/index.json', function(rawdata) {  
-        console.log(rawdata)
         data = JSON.parse(JSON.stringify(rawdata))
         console.log(data)
         for (let element of data) {
             let row = table.insertRow();
+            console.log(element)
             if (element != "template.json") {
-                $.getJSON('devices/'+element, function(devicedata) {  
+                $.getJSON('devices/'+element, function(devicerawdata) {  
+                    devicedata = JSON.parse(JSON.stringify(devicerawdata))
+                    console.log(devicedata)
                     for (key in devicedata) {
                         let cell = row.insertCell();
-                        let text = document.createTextNode(element[key]);
+                        let text = document.createTextNode(devicedata[key]);
                         cell.appendChild(text);
                     } 
                 });
@@ -106,7 +108,6 @@
     });
 
     $.getJSON('devices/template.json', function(rawdata) {  
-        console.log(rawdata)
         data = JSON.parse(JSON.stringify(rawdata))
         console.log(data)
         let datastruct = Object.keys(data);   
