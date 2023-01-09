@@ -85,11 +85,6 @@
 
 
     let table = document.querySelector("myTable");
-    var datastruct
-
-    $.getJSON('devices/template.json', function(data) {  
-        let datastruct = Object.keys(data);   
-    });
 
     $.getJSON('devices/index.json', function(data) {  
         for (let element of data) {
@@ -107,7 +102,11 @@
         }
     });
 
-    generateTableHead(table, datastruct); // then the head
+    $.getJSON('devices/template.json', function(data) {  
+        let datastruct = Object.keys(data);   
+        generateTableHead(table, datastruct); // then the head
+    });
+
 </script>
 
 </body>
