@@ -42,7 +42,7 @@
 <body>
 
 <h2>My Customers</h2>
-
+<input type="text" id="fileItem" />
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for ..." title="Type in a keyword">
 
 <table id="myTable">
@@ -86,6 +86,30 @@
 
 <script>
 function myFunction() {
+
+    var _getAllFilesFromFolder = function(dir) {
+
+    var filesystem = require("fs");
+    var results = [];
+
+    filesystem.readdirSync(dir).forEach(function(file) {
+
+        file = dir+'/'+file;
+        var stat = filesystem.statSync(file);
+
+        if (stat && stat.isDirectory()) {
+            results = results.concat(_getAllFilesFromFolder(file))
+        } else results.push(file);
+
+    });
+
+    return results;
+
+    };
+
+    var text = _getAllFilesFromFolder("devices")
+    document.getElementById("fileItem").innerHTML = text[0];
+
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
