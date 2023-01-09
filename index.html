@@ -226,8 +226,7 @@
                         modalheader.value = devicedata["name"]
                         modalbody.value =""
                         for (key in devicedata) {
-                            let text = document.createTextNode(devicedata[key]);
-                            modalbody.write(key + " : " + devicedata[key] + "\n");
+                            modalbody.appendChild(key + " : " + devicedata[key] + "\n");
                         } 
                         modal.style.display = "block";
                     };
