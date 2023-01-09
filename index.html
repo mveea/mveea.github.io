@@ -8,7 +8,6 @@
 }
 
 #myInput {
-  background-image: url('/css/searchicon.png');
   background-position: 10px 10px;
   background-repeat: no-repeat;
   width: 100%;
@@ -41,7 +40,7 @@
 </head>
 <body>
 
-<h2>My Customers</h2>
+<h2>Veeahub Device Support</h2>
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for ..." title="Type in a keyword">
 
 <table id="myTable">
@@ -86,31 +85,31 @@
 
     let table = document.getElementById("myTable");
 
-    $.getJSON('devices/index.json', function(rawdata) {  
-        data = JSON.parse(JSON.stringify(rawdata))
-        console.log(data)
-        for (let element of data) {
-            let row = table.insertRow();
-            console.log(element)
-            if (element != "template.json") {
-                $.getJSON('devices/'+element, function(devicerawdata) {  
-                    devicedata = JSON.parse(JSON.stringify(devicerawdata))
-                    console.log(devicedata)
-                    for (key in devicedata) {
-                        let cell = row.insertCell();
-                        let text = document.createTextNode(devicedata[key]);
-                        cell.appendChild(text);
-                    } 
-                });
-                
+    $.getJSON('devices/view.json', function(rawdataset) {  
+        dataset = JSON.parse(JSON.stringify(rawdataset))
+        console.log(dataset)
+        let datastruct = Object.keys(dataset);  
+        
+        $.getJSON('devices/index.json', function(rawdata) {  
+            data = JSON.parse(JSON.stringify(rawdata))
+            console.log(data)
+            for (let element of data) {
+                let row = table.insertRow();
+                console.log(element)
+                if (element != "template.json") {
+                    $.getJSON('devices/'+element, function(devicerawdata) {  
+                        devicedata = JSON.parse(JSON.stringify(devicerawdata))
+                        console.log(devicedata)
+                        for (key in datastruct) {
+                            let cell = row.insertCell();
+                            let text = document.createTextNode(devicedata[key]);
+                            cell.appendChild(text);
+                        } 
+                    });
+                    
+                }
             }
-        }
-    });
-
-    $.getJSON('devices/template.json', function(rawdata) {  
-        data = JSON.parse(JSON.stringify(rawdata))
-        console.log(data)
-        let datastruct = Object.keys(data);   
+        });
         generateTableHead(table, datastruct); // then the head
     });
 
