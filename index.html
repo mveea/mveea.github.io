@@ -96,7 +96,7 @@
             for (let element of data) {
                 let row = table.insertRow();
                 row.onclick = function(){
-                    alert(element);
+                    window.location.assign('devices/'+element);
                 };
                 console.log(element)
                 $.getJSON('devices/'+element, function(devicerawdata) {  
