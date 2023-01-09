@@ -87,28 +87,42 @@
 <script>
 function myFunction() {
 
-    var _getAllFilesFromFolder = function(dir) {
-
-    var filesystem = require("fs");
-    var results = [];
-
-    filesystem.readdirSync(dir).forEach(function(file) {
-
-        file = dir+'/'+file;
-        var stat = filesystem.statSync(file);
-
-        if (stat && stat.isDirectory()) {
-            results = results.concat(_getAllFilesFromFolder(file))
-        } else results.push(file);
-
-    });
-
-    return results;
-
-    };
-
-    var text = _getAllFilesFromFolder("devices")
-    document.getElementById("fileItem").innerHTML = text[0];
+    var ims = [];
+    (function(){
+        //Configure folder and naming convention of images
+        var imFold = 'devices',
+        imPrefix = '',
+        imSuffix = '.json',
+        numberingStart = 10,
+        numberPaddingLength = 0,
+        numberPaddingChar = '0',
+        //End configuration
+        imNum = --numberingStart, oops = null, im;
+        function numPad(n){
+            n += '';
+            while(n.length < numberPaddingLength){
+                n = numberPaddingChar + n;
+            }
+            return n;
+        }
+        function loadem(){
+            im = imFold + imPrefix + numPad(++imNum) + imSuffix;
+            (function(im){
+                var pIm = new Image();
+                pIm.onerror = function(){
+                    oops = true;
+                    alert(ims.join('\n') + '\n' + oops);
+                }
+                pIm.onload = function(){
+                    ims.push(this.src);
+                    setTimeout(loadem, 0);
+                }
+                pIm.src = im;
+            })(im);
+        }
+        loadem();
+    })();
+    document.getElementById("fileItem").innerHTML = ims[0];
 
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
