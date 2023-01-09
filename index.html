@@ -227,10 +227,10 @@
                         modaltable.innerHTML =""
                         for (key in devicedata) {
                             let modalrow = modaltable.insertRow();
-                            let cell = row.insertCell();
+                            let cell = modalrow.insertCell();
                             let text = document.createTextNode(key);
                             cell.appendChild(text);
-                            cell = row.insertCell();
+                            cell = modalrow.insertCell();
                             text = document.createTextNode(devicedata[key]);
                             cell.appendChild(text);
                         } 
