@@ -223,11 +223,11 @@
                         cell.appendChild(text);
                     } 
                     row.onclick = function(){
-                        modalheader.text = devicedata["name"]
-                        modalbody.text =""
-                        for (key in dataset) {
+                        modalheader.value = devicedata["name"]
+                        modalbody.value =""
+                        for (key in devicedata) {
                             let text = document.createTextNode(devicedata[key]);
-                            modalbody.appendChild(text);
+                            modalbody.write(key + " : " + devicedata[key] + "\n");
                         } 
                         modal.style.display = "block";
                     };
