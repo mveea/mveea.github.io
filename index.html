@@ -43,7 +43,7 @@
 
 <h2>My Customers</h2>
 
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for ..." title="Type in a keyword">
 
 <table id="myTable">
   <tr class="header">
@@ -92,14 +92,17 @@ function myFunction() {
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td");
     if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
+        for (j = 0; j < td.length; j++) {
+            txtValue = td[j].textContent || td[j].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                break
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
     }       
   }
 }
