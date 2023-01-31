@@ -146,6 +146,8 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+
 <script>
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
@@ -203,8 +205,11 @@
 
     let table = document.getElementById("myTable");
 
-    $.getJSON('devices/view.json', function(rawdataset) {  
-        dataset = JSON.parse(JSON.stringify(rawdataset))
+    var view = jsyaml.load(fs.readFileSync('devices/view.yml', 'utf8'),'json');
+    console.log(data)
+
+    //$.getJSON('devices/view.json', function(rawdataset) {  
+        dataset = JSON.parse(JSON.stringify(view))
         console.log(dataset)
         let datastruct = Object.keys(dataset);  
         
@@ -240,7 +245,7 @@
             }
         });
         generateTableHead(table, datastruct); // then the head
-    });
+    //});
 
 </script>
 
