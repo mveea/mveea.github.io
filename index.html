@@ -219,6 +219,7 @@
             $(data).find("a").each(function(){
               var fileName = $(this).attr("href")
               console.log(fileName)
+              let row = table.insertRow();
               $.get('devices/'+ fileName, function(deviceymldata) {  
                     var devicerawdata = jsyaml.load(deviceymldata,'json');
                     devicedata = JSON.parse(JSON.stringify(devicerawdata))
