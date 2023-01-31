@@ -205,10 +205,11 @@
 
     let table = document.getElementById("myTable");
 
-    var view = jsyaml.load(fs.readFileSync('devices/view.yml', 'utf8'),'json');
-    console.log(data)
 
     //$.getJSON('devices/view.json', function(rawdataset) {  
+    $.get('devices/view.yml', function(rawdataset) { 
+        var view = jsyaml.load(rawdataset,'json');
+        console.log(data)
         dataset = JSON.parse(JSON.stringify(view))
         console.log(dataset)
         let datastruct = Object.keys(dataset);  
@@ -245,7 +246,7 @@
             }
         });
         generateTableHead(table, datastruct); // then the head
-    //});
+    });
 
 </script>
 
