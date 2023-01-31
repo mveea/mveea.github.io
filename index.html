@@ -207,10 +207,9 @@
 
 
     //$.getJSON('devices/view.json', function(rawdataset) {  
-    $.get('devices/view.yml', function(rawdataset) { 
-        var view = jsyaml.load(rawdataset,'json');
-        console.log(view)
-        dataset = JSON.parse(JSON.stringify(view))
+    $.get('devices/view.yml', function(ymldataset) { 
+        var rawdataset = jsyaml.load(ymldataset,'json');
+        dataset = JSON.parse(JSON.stringify(rawdataset))
         console.log(dataset)
         let datastruct = Object.keys(dataset);  
 
@@ -220,7 +219,8 @@
             $(data).find("a:contains(.yml)").each(function(){
               var fileName = $(this).attr("href")
               console.log(fileName)
-              $.getJSON('devices/'+ fileName, function(devicerawdata) {  
+              $.get('devices/'+ fileName, function(deviceymldata) {  
+                    var devicerawdata = jsyaml.load(deviceymldata,'json');
                     devicedata = JSON.parse(JSON.stringify(devicerawdata))
                     console.log(devicedata)
                     for (key in dataset) {
