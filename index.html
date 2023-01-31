@@ -214,25 +214,13 @@
         console.log(dataset)
         let datastruct = Object.keys(dataset);  
 
-        var fileNames = new Array()
         $.ajax({
           url: "devices/", 
           success: function(data) {
             $(data).find("a:contains(.yml)").each(function(){
-              fileNames.push($(this).attr("href"))
-              console.log(fileNames)
-            });
-          }
-        }); 
-        
-        
-        $.getJSON('devices/index.json', function(rawdata) {  
-            data = JSON.parse(JSON.stringify(rawdata))
-            console.log(data)
-            for (let element of data) {
-                let row = table.insertRow();
-                console.log(element)
-                $.getJSON('devices/'+element, function(devicerawdata) {  
+              var fileName = $(this).attr("href"))
+              console.log(fileName)
+              $.getJSON('devices/'+ fileName, function(devicerawdata) {  
                     devicedata = JSON.parse(JSON.stringify(devicerawdata))
                     console.log(devicedata)
                     for (key in dataset) {
@@ -255,8 +243,42 @@
                         modal.style.display = "block";
                     };
                 });
-            }
-        });
+            });
+          }
+        }); 
+        
+        
+        // $.getJSON('devices/index.json', function(rawdata) {  
+        //     data = JSON.parse(JSON.stringify(rawdata))
+        //     console.log(data)
+        //     for (let element of data) {
+        //         let row = table.insertRow();
+        //         console.log(element)
+        //         $.getJSON('devices/'+element, function(devicerawdata) {  
+        //             devicedata = JSON.parse(JSON.stringify(devicerawdata))
+        //             console.log(devicedata)
+        //             for (key in dataset) {
+        //                 let cell = row.insertCell();
+        //                 let text = document.createTextNode(devicedata[key]);
+        //                 cell.appendChild(text);
+        //             } 
+        //             row.onclick = function(){
+        //                 modalheader.innerHTML = devicedata["name"]
+        //                 modaltable.innerHTML =""
+        //                 for (key in devicedata) {
+        //                     let modalrow = modaltable.insertRow();
+        //                     let cell = modalrow.insertCell();
+        //                     let text = document.createTextNode(key);
+        //                     cell.appendChild(text);
+        //                     cell = modalrow.insertCell();
+        //                     text = document.createTextNode(devicedata[key]);
+        //                     cell.appendChild(text);
+        //                 } 
+        //                 modal.style.display = "block";
+        //             };
+        //         });
+        //     }
+        // });
         generateTableHead(table, datastruct); // then the head
     });
 
