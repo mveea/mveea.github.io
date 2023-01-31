@@ -213,6 +213,15 @@
         dataset = JSON.parse(JSON.stringify(view))
         console.log(dataset)
         let datastruct = Object.keys(dataset);  
+
+        var fileNames = new Array()
+        $.ajax("devices/", function(data) {
+            $(data).find("td > a").each(function(){
+              fileNames.push($(this).attr("href"))
+              console.log(fileNames)
+          });
+        }); 
+        
         
         $.getJSON('devices/index.json', function(rawdata) {  
             data = JSON.parse(JSON.stringify(rawdata))
