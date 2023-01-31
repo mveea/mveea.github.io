@@ -218,7 +218,7 @@
           url: "devices/", 
           success: function(data) {
             $(data).find("a:contains(.yml)").each(function(){
-              var fileName = $(this).attr("href"))
+              var fileName = $(this).attr("href")
               console.log(fileName)
               $.getJSON('devices/'+ fileName, function(devicerawdata) {  
                     devicedata = JSON.parse(JSON.stringify(devicerawdata))
