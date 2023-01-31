@@ -1,0 +1,16 @@
+name: Wiser Motion Sensor
+manufacturer: Schneider Electric
+model: CCT595011_AS
+type: Zigbee
+features:
+    - motion
+veeahub:
+    - vhx09-10
+    - vhc25
+solution:
+    - vBus
+    - vPME
+status: Full Support
+url: https://www.se.com/ww/en/product/CCT595011_AS/wiser-motion-sensor/
+joining: Short press the function key 3 times within 1 s. The sensor scans for the available Zigbee network. The status LED turns green if the sensor successfully connects to the Wiser Hub.
+comments:

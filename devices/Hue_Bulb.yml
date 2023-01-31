@@ -1,0 +1,18 @@
+
+name: Hue Bulb(Color)
+manufacturer: Philips
+model: E26 Smart Bulb
+type: Zigbee
+features:
+    - Light
+    - Color
+veeahub:
+    - vhx09-10
+    - vhc25
+solution:
+    - vBus
+    - vPME
+status: Full Support
+url: https://www.philips-hue.com/en-us/products/smart-light-bulbs
+joining: With the Hue remote device, press for 20 sec both buttons until the bulb toggles the light
+comments:
