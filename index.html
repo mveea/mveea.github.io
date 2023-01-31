@@ -215,11 +215,14 @@
         let datastruct = Object.keys(dataset);  
 
         var fileNames = new Array()
-        $.ajax("devices/", function(data) {
+        $.ajax({
+          url: "devices/", 
+          success: function(data) {
             $(data).find("td > a").each(function(){
               fileNames.push($(this).attr("href"))
               console.log(fileNames)
-          });
+            });
+          }
         }); 
         
         
