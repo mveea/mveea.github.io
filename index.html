@@ -216,7 +216,7 @@
         $.ajax({
           url: "devices/", 
           success: function(data) {
-            $(data).find("body > a").each(function(){
+            $(data).find("body").find("a").each(function(){
               var fileName = $(this).attr("href")
               console.log(fileName)
               $.get('devices/'+ fileName, function(deviceymldata) {  
